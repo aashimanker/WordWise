@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Page</title>
+</head>
+<body>
+    <h1>Feedback Responses</h1>
+    <ul id="feedback-list"></ul>
+
+    <script>
+        // Load feedback data dynamically from the server
+        fetch('/get-feedback-data')
+            .then(response => response.json())
+            .then(feedbackData => {
+                const feedbackList = document.getElementById('feedback-list');
+                feedbackData.forEach(entry => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = entry.comment; // Assuming your feedback entry has a 'comment' property
+                    feedbackList.appendChild(listItem);
+                });
+            })
+            .catch(error => console.error('Error fetching feedback data:', error));
+    </script>
+</body>
+</html>
